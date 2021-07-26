@@ -10,7 +10,7 @@
  
  Promise.all(requests).then(responses => {return responses;}).then(responses => Promise.all(responses.map(r => r.json())))
  .then(responses => {
-		debugger;     
+	debugger;     
         var accountOwner = responses[0]._ownerid_value;   
         var isPartOfTeam = (responses[1].value.length > 0);
   });
