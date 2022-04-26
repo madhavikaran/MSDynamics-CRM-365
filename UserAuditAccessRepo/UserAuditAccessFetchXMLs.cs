@@ -1,4 +1,3 @@
-
 namespace CRMAuditingDataSource
 {
     internal sealed class UserAuditAccessFetchXMLs
