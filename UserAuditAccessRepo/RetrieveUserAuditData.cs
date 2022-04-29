@@ -109,7 +109,32 @@ namespace CRMAuditingDataSource
                     outputEN["dev_lastlogindatetime"] = su.GetAttributeValue<DateTime>("createdon");
                     outputENC.Entities.Add(outputEN);
                 }
-                context.OutputParameters["BusinessEntityCollection"] = outputENC;
+                
+                #region Paging
+                
+                var query = (QueryExpression)context.InputParameters["Query"];
+                var totalRecordPerPage = query.PageInfo.Count;
+                var totalPage = (int)Math.Ceiling((decimal)outputENC.Entities.Count / totalRecordPerPage);
+                var arrayData = outputENC.Entities.ToArray();
+                var pageInfo = string.IsNullOrEmpty(query.PageInfo.PagingCookie)
+                ? new[] { 0, totalPage, -1 }
+                : query.PageInfo.PagingCookie.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)
+                 .Select(e => int.Parse(e.Trim())).ToArray();
+                var pageNumber = pageInfo[2] > -1 && pageInfo[2] != outputENC.Entities.Count ? 0 : pageInfo[0];
+                var pagingData = arrayData.Skip(totalRecordPerPage * pageNumber).Take(totalRecordPerPage).ToArray();
+                pageNumber += 1;
+                query.PageInfo.PageNumber = pageNumber;
+                query.PageInfo.PagingCookie = $"{pageNumber}/{totalPage}/{outputENC.Entities.Count}";
+                var entityCollection = new EntityCollection(pagingData)
+                {
+                    MoreRecords = pageNumber < totalPage,
+                    PagingCookie = query.PageInfo.PagingCookie,
+                    TotalRecordCount = outputENC.Entities.Count
+                };
+
+                #endregion Paging
+
+                context.OutputParameters["BusinessEntityCollection"] = entityCollection;
             }
             else
             {
