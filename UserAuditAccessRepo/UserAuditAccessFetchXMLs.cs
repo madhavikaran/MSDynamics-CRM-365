@@ -3,7 +3,7 @@ namespace CRMAuditingDataSource
     internal sealed class UserAuditAccessFetchXMLs
     {
         internal const string retrieveMultipleXML = @"
-        <fetch mapping='logical' version='1.0'>
+        <fetch mapping='logical' version='1.0' count ='5000'>
             <entity name='audit' >
                 <attribute name='auditid' />
                 <attribute name='createdon'/>
