@@ -29,7 +29,7 @@ namespace MAD_D365.Plugins
             var viewStatusField = (from c in entityElement.Descendants("attribute")
                                             where c.Attribute("name").Value.Equals("mad_knowledgearticleviewstatus")
                                             select c);                             
-			// Check if View Status field is part of the view										
+	    // Check if View Status field is part of the view										
             if(viewStatusField.Count() == 0){
                 tracer.Trace("Not the correct View.");
                 return;
