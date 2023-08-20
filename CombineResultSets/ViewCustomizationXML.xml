@@ -1,9 +1,9 @@
 <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
    <entity name="knowledgearticle">
-	  <attribute name="knowledgearticleid" />
+      <attribute name="knowledgearticleid" />
       <attribute name="mad_knowledgearticleviewstatus" />
       <attribute name="title" />
-	  <attribute name="modifiedon" />
+      <attribute name="modifiedon" />
       <order attribute="modifiedon" descending="true" />
       <filter type="and">
          <condition attribute="statecode" operator="eq" value="3" />
