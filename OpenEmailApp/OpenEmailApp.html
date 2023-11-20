@@ -1,0 +1,33 @@
+<html>
+<head>
+<script>
+	function AddEventListenerToEmail(formcontext){
+		//Get the recievers data from CRM fields
+		const toAddress = formcontext.getAttribute("emailaddress1").getValue();
+		const ccAddress = formcontext.getAttribute("mad_cc").getValue();
+		const bccAddress = formcontext.getAttribute("mad_bcc").getValue();
+		
+		//Find Email icon element using data-id
+		const emailFieldEl = parent.document.querySelector("[data-id='emailaddress1.fieldControl-mail-action-icon']");
+		
+		if (emailFieldEl !== null){
+
+			//Mail Recivers information
+			const location = 'mailto:'+ toAddress +'?cc='+ ccAddress +'&bcc='+ bccAddress;			
+			const func = function(){document.location= location;};
+
+			// creating new element by copying the existing one
+			const new_el = emailFieldEl.cloneNode(true);
+
+			//adding click event to element
+			new_el.addEventListener("click", func);
+
+			// Replacing old elemnet with new element
+            emailFieldEl.parentNode.replaceChild(new_el, emailFieldEl);			
+		}
+	}
+</script>
+</head>
+<body>
+</body>
+</html>
