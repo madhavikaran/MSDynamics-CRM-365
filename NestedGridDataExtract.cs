@@ -130,9 +130,9 @@ namespace NestedGrid
                             #region Child Case Row
 
                             htmlStringBuilder.AppendLine("<tr><td></td>");
-                            htmlStringBuilder.AppendFormat(childTableRowFormat, parentcase.GetAttributeValue<string>("title"));
-                            htmlStringBuilder.AppendFormat(childTableRowFormat, parentcase.GetAttributeValue<string>("ticketnumber"));
-                            htmlStringBuilder.AppendFormat(childTableRowFormat, parentcase.GetAttributeValue<DateTime>("createdon"));
+                            htmlStringBuilder.AppendFormat(childTableRowFormat, childcase.GetAttributeValue<string>("title"));
+                            htmlStringBuilder.AppendFormat(childTableRowFormat, childcase.GetAttributeValue<string>("ticketnumber"));
+                            htmlStringBuilder.AppendFormat(childTableRowFormat, childcase.GetAttributeValue<DateTime>("createdon"));
                             htmlStringBuilder.AppendLine("</tr>");
 
                             #endregion Child Case Row
